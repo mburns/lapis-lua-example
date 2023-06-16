@@ -9,4 +9,8 @@ config("development", {
   session_name = "my_app_session",
   secret = "A string witches also my s3cr3t!"
   track_exceptions = true
+  sqlite = {
+    database = "site.sqlite"
+    -- open_falgs = ...
+  }
 })
