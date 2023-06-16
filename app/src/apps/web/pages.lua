@@ -14,6 +14,8 @@ app:include("apps.web.users")
 app:include("apps.web.homepage")
 
 -- submit a new post
-app:match("submit", "/submit", function(self) end)
+app:match("submit", "/submit", function(self)
+    print("DEBUG: submit a new post")
+end)
 
 return app

@@ -15,13 +15,17 @@ app:enable("etlua")
 app.enable({ __base = app }, "exception_tracking")
   app.layout = require "views.layout"
 
-app:before_filter(function(self)
-  if self.session.user then
-    self.current_user = load_user(self.session.user)
-  end
+-- app:before_filter(function(self)
+--   if self.session.user then
+--     self.current_user = load_user(self.session.user)
+--   end
+-- end)
+
+app:get("/example", function()
+  return "Welcome, " .. require("lapis.version")
 end)
 
 -- app:include("apps.api")
-app:include("apps.web")
+-- app:include("apps.web")
 
 return app

@@ -20,8 +20,8 @@ config("development", {
 	lua_path   = lua_path,
   name       = "[DEVEL] readit",
   session_name = "my_app_session",
-  secret     = "A string witches also my s3cr3t!"
-  track_exceptions = true
+  secret     = "A string witches also my s3cr3t!",
+  track_exceptions = true,
   sqlite = {
     database = "site.sqlite"
     -- open_falgs = ...

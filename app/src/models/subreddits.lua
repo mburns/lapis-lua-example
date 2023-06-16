@@ -1,6 +1,6 @@
 local db     = require "lapis.db"
 local giflib = require "giflib"
-local lfs    = require "lfs"
+-- local lfs    = require "lfs"
 local magick = require "magick"
 local Model  = require("lapis.db.model").Model
 
