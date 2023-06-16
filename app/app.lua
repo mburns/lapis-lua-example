@@ -1,8 +1,13 @@
 local lapis = require("lapis")
 local config = require("lapis.config").get()
+local csrf = require("lapis.csrf")
+local db = require("lapis.db")
+
+local capture_errors = require("lapis.application").capture_errors
 
 local app = lapis.Application()
 app:enable("etlua")
+app.enable({ __base = app }, "exception_tracking")
 app.layout = require "views.layout"
 
 app:before_filter(function(self)
@@ -10,6 +15,9 @@ app:before_filter(function(self)
     self.current_user = load_user(self.session.user)
   end
 end)
+
+-- app:include("apps.api")
+-- app:include("apps.web")
 
 -- homepage
 app:get("homepage", "/", function()
@@ -46,7 +54,21 @@ app:match("user_settings", "/settings/*[%w]", function(self) end)
 app:match("user_preferences", "/prefs/*[%w]", function(self) end)
 
 -- authentication
-app:match("login", "/login", function(self) end)
+app:match("login", "/login", function(self)
+  local csrf_token = csrf.generate_token(self)
+  self:html(function()
+    form({ method = "POST", action = self:url_for("form") }, function()
+      input({ type = "hidden", name = "csrf_token", value = csrf_token })
+      input({ type = "submit" })
+    end)
+  end)
+end)
+
+app:post("login", "/login", capture_errors(function(self)
+  csrf.assert_token(self)
+  return "The form is valid!"
+end))
+
 app:match("logout", "/logout", function(self) end)
 app:match("password", "/password", function(self) end)
 
