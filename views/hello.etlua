@@ -1,0 +1,2 @@
+<h1>Hello, <%= self.params.name %></h1>
+<p>Welcome to my page</p>
