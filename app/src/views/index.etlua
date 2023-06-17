@@ -1,2 +1,1 @@
-<h1><%= page.name %></h1>
-<%- page.content %>
+<h1>It works!</h1>

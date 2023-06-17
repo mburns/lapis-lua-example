@@ -1,11 +1,7 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title><%= page_title or "My Page" %></title>
-</head>
-<body>
-  <h1>Greetings</h1>
-  <% content_for("inner") %>
-</body>
-</html>
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>It works!</title>
+<main>
+	<% content_for("inner") %>
+</main>

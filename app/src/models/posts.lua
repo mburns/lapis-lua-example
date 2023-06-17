@@ -1,17 +1,17 @@
-local encoding  = require "lapis.util.encoding"
+-- local encoding  = require "lapis.util.encoding"
 local Model     = require("lapis.db.model").Model
-local giflib    = require "giflib"
-local magick    = require "magick"
-local md5       = require "md5"
-local filetypes = require "utils.file_whitelist"
-local generate  = require "utils.generate"
--- local Posts     = Model:extend("posts", {
--- 	relations = {
--- 		{ "subreddit",  belongs_to="Subreddits" },
--- 		{ "post", belongs_to="Posts" },
--- 	}
--- })
-local sf = string.format
+-- local giflib    = require "giflib"
+-- local magick    = require "magick"
+-- local md5       = require "md5"
+-- local filetypes = require "utils.file_whitelist"
+-- local generate  = require "utils.generate"
+local Posts     = Model:extend("posts", {
+	relations = {
+		{ "subreddit",  belongs_to="Subreddits" },
+		{ "post", belongs_to="Posts" },
+	}
+})
+-- local sf = string.format
 
 --- Create a new post
 -- @tparam table params Post parameters

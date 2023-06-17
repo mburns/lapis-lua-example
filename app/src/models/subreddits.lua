@@ -1,8 +1,8 @@
-local db     = require "lapis.db"
-local giflib = require "giflib"
--- local lfs    = require "lfs"
-local magick = require "magick"
-local Model  = require("lapis.db.model").Model
+-- local db     = require "lapis.db"
+-- local giflib = require "giflib"
+-- local lfs    = require "luafilesystem" -- lfs
+-- local magick = require "magick"
+-- local Model  = require("lapis.db.model").Model
 
 --- Create a board
 -- @tparam table params Board parameters
@@ -26,8 +26,8 @@ end
 function Subreddits :delete(name)
 end
 
---- Get all subreddits 
--- @treturn table subreddits 
+--- Get all subreddits
+-- @treturn table subreddits
 function Subreddits :get_all()
 	-- local subreddits  = self:select("order by subreddits .group asc, name asc")
 	-- return subreddits  and subreddits  or false, "FIXME: ALART!"

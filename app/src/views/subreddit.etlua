@@ -1,2 +1,2 @@
-<h1>Hello, <%= params.name %></h1>
-<p>Welcome to my page</p>
+<h1>Welcome to the <%= params.subreddit %> subreddit!</h1>
+<p><%= params.splat %></p>

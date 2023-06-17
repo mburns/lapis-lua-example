@@ -1,2 +1,2 @@
-<h1>Hello, <%= params.name %></h1>
-<p>Welcome to my page</p>
+<h1><%= params.name %></h1>
+<%- page.content %>
