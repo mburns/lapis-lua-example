@@ -16,11 +16,10 @@ config("development", {
 	code_cache = "off",
 	num_workers = "1",
 	name       = "[DEVEL] readit",
-	session_name = "my_app_session",
-	secret     = "A string witches also my s3cr3t!",
-	track_exceptions = true,
+	session_name = "dev_app_session",
+	secret     = "A not very s3cretive secret.",
 	sqlite = {
-	  database = "site.sqlite"
+	  database = "/var/data/dev.sqlite"
 	  -- open_falgs = ...
 	}  
 })
@@ -34,13 +33,12 @@ config("production", {
 	server     = "nginx",
 	code_cache = "off",
 	num_workers = "1",
-	name       = "[DEVEL] readit",
-	session_name = "my_app_session",
+	name       = "readit",
+	session_name = "prod_app_session",
 	secret     = "A string witches also my s3cr3t!",
 	track_exceptions = true,
 	sqlite = {
-	  database = "production.sqlite"
-	  -- open_falgs = ...
+	  database = "/var/data/production.sqlite"
 	}  
 })
 
@@ -52,12 +50,10 @@ config("test", {
 	server     = "nginx",
 	code_cache = "off",
 	num_workers = "1",
-	name       = "[DEVEL] readit",
-	session_name = "my_app_session",
-	secret     = "A string witches also my s3cr3t!",
-	track_exceptions = true,
+	name       = "[TEST] readit",
+	session_name = "test_app_session",
+	secret     = "A different random string",
 	sqlite = {
-	  database = "test.sqlite"
-	  -- open_falgs = ...
+	  database = "/var/data/test.sqlite"
 	}
 })

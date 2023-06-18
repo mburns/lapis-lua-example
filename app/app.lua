@@ -8,38 +8,40 @@ local r2    = require("lapis.application").respond_to
 
 local app   = lapis.Application()
 
-app.include = function(self, a)
-	self.__class.include(self, a, nil, self)
-end
+-- app.include = function(self, a)
+-- 	self.__class.include(self, a, nil, self)
+-- end
 
 app:enable("etlua")
--- app.enable("exception_tracking")
 
 app.layout = require "views.layout"
 
--- app:before_filter(function(self)
---   if self.session.user then
---     self.current_user = load_user(self.session.user)
---   end
--- end)
-
--- landing page
-app:match("homepage", "/", r2(require "actions.index"))
-
--- test endpoints
-app:match("health", "/health", function()
-    return "Hello, " .. require("lapis.version")
+app:before_filter(function(self)
+  if self.session.user then
+    self.current_user = load_user(self.session.user)
+  end
 end)
 
--- subreddits
-app:get("subreddit", "/r/:subreddit", r2(require "actions.subreddit"))
-app:match("/r/:subreddit/*", r2(require "actions.subreddit"))
+app:match("homepage",  "/",                       r2(require "actions.index"))
+app:match("subreddits", "/subreddits(/:type)",    r2(require "actions.subreddits"))
+app:match("subreddit", "/r/:subreddit[%w](/:sort)",   r2(require "actions.subreddit"))
+app:match("profile",   "/user/:user(/:type)", r2(require "actions.user"))
 
--- user
-app:match("user_profile", "/user/:username[%w]", r2(require "actions.user"))
-app:match("user_comments", "/user/:username[%w]/comments", r2(require "actions.user"))
-app:match("user_submitted", "/user/:username[%w]/submitted", function(self)
-    print(self.params.username)
+app:match("post", "/r/:subreddit/comments/:post_id[%w](/:title_stub)", r2(require "actions.post"))
+
+app:match("password", "/password", function(self) end) -- stub
+app:match("login",    "/login",    function(self) end) -- stub
+app:match("logout",   "/logout",   function(self)
+	-- Logout
+	self.session.user  = nil
+	self.session.admin = nil
+	self.session.mod   = nil
+
+	return { redirect_to = self:url_for("homepage") }
+end)
+
+app:match("health", "/health", function()
+  return "Hello, " .. require("lapis.version")
 end)
 
 return app

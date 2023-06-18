@@ -1,33 +1,36 @@
 # readit
 
-A better social link sharing website.
+A better social link-sharing website.
 
 ## TODO
 
 - [ ] change the name
-- [ ] user accounts w/csrf
 - [ ] model relationships defined:
     * 1 User -> 1 Comment
     * many comments -> 1 Post
     * many posts -> 1 Subreddit
     * many subreddits -> 1 Subreddits listing
-- [ ] Pages
+- [ ] add [Constraints](https://leafo.net/lapis/reference/models.html#constraints) to models (?)
+- [ ] add table indexes (hot-sorted subreddit posts, homepage, user accounts)
+- [ ] user accounts w/[CSRF](https://leafo.net/lapis/reference/utilities.html#csrf-protection )
+- [ ] Individual Pages
   - [ ] `homepage`
-  - [ ] `subreddit` landing page
-  - [ ] `/submit` (per-subreddit)
-  - [ ] `/login`, `/logout`, `/password`
   - [ ] `/subreddits/` `/subreddits/mine` listings pages
+  - [ ] `subreddit` landing page
+    - [ ] Sorting parameter (`/r/.../top/?t=year`, `/popular`, `new`, `rising`, `controversial`)
+    - [ ] use [Pagination](https://leafo.net/lapis/reference/models.html#pagination)
+  - [ ] `/r/.../submit` (per-subreddit)
+  - [ ] `/login`, `/logout`, `/password`
   - [ ] `prefs`, `settings`
+- [ ] RSS feed import/sync (per-subreddit?)
 - [ ] API (https://reddit.com/dev/api/)
-- [ ] Sorting / parsing parameter arguments (`/r/.../top/?t=year`, `/popular`, `new`, `rising`, `controversial`, ~~`gilded`~~)
-- [ ] RSS feed import/sync
 
 ## Development
 
-From the root of the directory:
+From the root directory:
 
 ```
- docker run \
+docker run \
     -dti \
     -v "./data:/var/data" \
     -v "./app:/var/www" \
@@ -42,5 +45,5 @@ Then, visit: http://localhost:8080/
 
 # Notes
 
-* [Reddit Archive](https://github.com/reddit-archive/reddit)
-* Built using [Lapis](https://leafo.net/lapis/) on [CentOS](https://github.com/karai17/lapis-centos) in [Lua v5.1](https://www.lua.org/manual/5.1/) using [OpenResty](https://openresty.org/)
+* [Reddit Archive](https://github.com/reddit-archive/reddit) - for CSS and HTML inspiration
+* Built using [Lapis](https://leafo.net/lapis/) and [OpenResty](https://openresty.org/) in [Lua v5.1](https://www.lua.org/manual/5.1/)

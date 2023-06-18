@@ -1,0 +1,19 @@
+<h1>Subreddits</h1>
+
+<% 
+if params.sort == nil then 
+    params.sort = "popular"
+end
+%>
+<p>Sorted by: <%= params.sort %></p>
+
+<%
+if subreddits ~= nil then
+    for _, sub in ipairs(subreddits) do %>
+        <p>
+            <a href="/r/<%= sub.name %>">/r/<%= sub.name %></a>
+        </p>
+    <% end %>
+<% else %>
+    No subreddits found.
+<% end %>

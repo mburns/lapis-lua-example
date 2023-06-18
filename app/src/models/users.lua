@@ -1,29 +1,20 @@
 local bcrypt = require "bcrypt"
-local uuid   = require "resty.jit-uuid"
+-- local uuid   = require "resty.jit-uuid"
 local config = require("lapis.config").get()
 local Model  = require("lapis.db.model").Model
-local Users  = Model:extend("users")
 local token  = config.secret
 
-Users.role = {
-	[-1] = "INVALID",
-	[1]  = "USER",
-	[7]  = "MOD",
-	[8]  = "ADMIN",
-	[9]  = "OWNER",
-
-	INVALID = -1,
-	USER    = 1,
-	MOD     = 7,
-	ADMIN   = 8,
-	OWNER   = 9
-}
-
-Users.valid_record = {
-	{ "username", exists=true },
-	{ "role",     exists=true, is_integer=true }
-}
-
+local Users  = Model:extend("users")
+-- local Users = Model:extend("users", {
+-- 	constraints = {
+-- 	  name = function(self, value)
+-- 		if value:lower() == "admin" then
+-- 		  return "User can not be named admin"
+-- 		end
+-- 	  end
+-- 	}
+-- })
+  
 --- Create a new user
 -- @tparam table user User data
 -- @treturn boolean success
@@ -120,14 +111,7 @@ function Users.validate_password(_, password, confirm, old_password)
 	return true
 end
 
-function Users:generate_api_key()
-	for _ = 1, 10 do
-		local api_key = uuid()
-		local user    = self:find { api_key=api_key }
-		if not user then return api_key end
-	end
-
-	return nil, "FIXME"
-end
+-- function Users:generate_api_key()
+-- end
 
 return Users

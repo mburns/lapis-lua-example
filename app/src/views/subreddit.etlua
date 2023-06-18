@@ -1,2 +1,22 @@
-<h1>Welcome to the <%= params.subreddit %> subreddit!</h1>
-<p><%= params.splat %></p>
+<h1>/r/<%= params.subreddit %></h1>
+
+<% 
+if params.sort == nil then 
+    params.sort = "hot"
+end
+%>
+<p>Sorted by: <%= params.sort %></p>
+
+<% 
+if posts ~= nil then
+    for n, post in ipairs(posts) do %>
+        <p>
+            <%= n %> - <a href="<%= post.url or post.permalink %>"><%= post.title %></a> by <%= post.user_id %> at <%= post.created_utc %>.
+            <a href="/r/<%= params.subreddit %>/comments/<%= params.post_id %>" alt="permalink">Permalink</a>
+        </p>
+    <% end %>
+<% else %>
+    Nothing to see here.
+<% end %>
+
+<a href="/">Home</a>
