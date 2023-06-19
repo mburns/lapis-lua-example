@@ -1,5 +1,0 @@
-<h1>User Profile for <%= params.name %></h1>
-
-User since <%= params.created_utc %>
-
-<a href="/">Home</a>

@@ -1,9 +1,1 @@
-<h1>Readit</h1>
-
-<p><img src="/static/icons/quarantine-header.png" alt="Under Construction"></p>
-
-<ul>
-    <li><a href="/subreddits">Subreddits</a></li>
-    <li><a href="/r/meta">/r/meta</a> - a subreddit about the site itself</li>
-    <li><a href="/user/anonymous_coward">/user/anonymous_coward</a> - example user profile</li>
-</ul>
+Result of query: <%= params.q %>
